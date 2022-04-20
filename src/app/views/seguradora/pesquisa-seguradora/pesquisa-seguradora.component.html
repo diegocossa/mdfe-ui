@@ -1,0 +1,44 @@
+<div class="">
+  <div class="row">
+    <div class="col-md-6 col-sm-12">
+      <div class="breadcrumb">
+        <h1>Seguradora</h1>
+        <ul>
+          <li>Pesquisa</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-sm-12">
+      <div class="float-right" style="width: 100%">
+        <button type="button" [routerLink]="['/seguradora/cadastro']" [disabled]="!auth.hasAuthority('ROLE_CADASTRAR_SEGURADORA')"
+                class="btn btn-success m-1" style="float: right">Nova
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="separator-breadcrumb border-top"></div>
+
+  <div class="row">
+    <div class="col-12 col-sm-12">
+      <!-- TODO: Filtros aqui. -->
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card o-hidden">
+        <app-table [data]="seguradoras"
+                   [columns]="cols"
+                   [actions]="actions"
+                   [externalPaging]="true"
+                   [count]="paginatorLength"
+                   [colActionWidth]="150"
+                   (actionPerformed)="actionPerformed($event)"
+                   (page)="onPageChange($event)"></app-table>
+      </div>
+    </div>
+  </div>
+</div>
+

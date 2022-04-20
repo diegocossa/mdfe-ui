@@ -1,0 +1,115 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-title">Informações da Unidade de Transporte</h4>
+  <button type="button" class="close" aria-label="Fechar" aria-describedby="modal-title"
+          (click)="salvarUnidadeTransporte()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form [formGroup]="data.unidadeTransporte" (validSubmit)="salvarUnidadeTransporte()">
+  <div class="modal-body">
+    <form-wizard [showDone]="false">
+      <wizard-step title="Principal" [isActive]="false" [isValid]="true" [showNext]="false" [showPrev]="false">
+        <div class="row">
+          <div class="col-md-6 col-sm-12 form-group mb-3">
+            <label>Tipo de Unidade de Transporte</label>
+            <ng-select [items]="tiposUnidade"
+                       appendTo="body"
+                       bindLabel="label"
+                       bindValue="value"
+                       formControlName="tpunidtransp"
+                       clearAllText="Limpar.."
+                       id="tracao">
+            </ng-select>
+          </div>
+          <div class="col-md-3 col-sm-12 form-group mb-3">
+            <label>Identificação da U. Transporte</label>
+            <input class="form-control form-control-rounded" placeholder="Identificação da U. Transporte" maxlength="20"
+                   formControlName="idunidtransp">
+          </div>
+          <div class="col-md-3 col-sm-12 form-group mb-3">
+            <label>Quantidade Rateada</label>
+            <input class="form-control form-control-rounded" currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', precision: 2 }"  placeholder="Qtd. Rateada"
+                   formControlName="qtdrateada">
+          </div>
+
+          <div class="col-12 form-group mb-3">
+            <label>Lacres da Unidade de Transporte</label>
+            <tag-input [formControl]="data.unidadeTransporte.get('lacreunidtransplist')" placeholder="Lacre +" maxlength="20"
+                       [modelAsStrings]="true" theme='primary' secondaryPlaceholder="Digite e aperte enter..">
+            </tag-input>
+          </div>
+        </div>
+      </wizard-step>
+      <wizard-step title="Inf. Unidade de Carga" [isActive]="false" [isValid]="true" [showNext]="false"
+                   [showPrev]="false">
+        <div class="card" style="margin-bottom: 12px;">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-12 col-md-6 text-center" style="padding-bottom: 12px;">
+                <p>Clique no botão ao lado para adicionar itens a lista de unidade de carga.</p>
+              </div>
+              <div class="col-sm-12 col-md-6 text-center" style="padding-bottom: 12px;">
+                <button type="button" class="btn btn-rounded btn-success" (click)="adicionarUnidadeCarga()">Adicionar
+                </button>
+              </div>
+            </div>
+
+            <div class="col-12" *ngIf="data.unidadeTransporte.controls['infunidcargalist']['controls']?.length === 0">
+              Nenhum registro encontrado..
+            </div>
+            <div class="col-12" *ngIf="data.unidadeTransporte.controls['infunidcargalist']['controls']?.length > 0">
+              <div class="row">
+                <div class="col-sm-12 col-md-10">
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      <strong>Tipo da Unidade de Carga</strong>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                      <strong>Identificação da U. de Carga</strong>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2 col-sm-12 text-center">
+                  <strong>Ações</strong>
+                </div>
+              </div>
+            </div>
+            <div class="col-12"
+                 *ngFor="let unidadeCarga of data.unidadeTransporte.controls['infunidcargalist']['controls']"
+                 style="padding-bottom: 12px;">
+              <div class="row">
+                <div class="col-sm-12 col-md-10" *ngIf="unidadeCarga.valid; else unidadeInvalida">
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      {{ getTipoUnidadeCarga(unidadeCarga.get('tpunidcarga').value) }}
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                      {{ unidadeCarga.get('idunidcarga').value }}
+                    </div>
+                  </div>
+                </div>
+
+                <ng-template #unidadeInvalida>
+                  <div class="col-sm-12 col-md-10">
+                    <span class="badge badge-pill badge-danger p-2 mr-1">Unidade de Carga inválida! Edite-a para corrigir.</span>
+                  </div>
+                </ng-template>
+
+                <div class="col-md-2 col-sm-12 text-center">
+                  <button type="button" (click)="abrirModalUnidadeCarga(unidadeCarga)"
+                          class="btn btn-info btn-rounded" ngbTooltip="Editar Unidade"><i class="i-Edit"></i></button>&nbsp;
+                  <button type="button" (click)="removerUnidade(unidadeCarga)"
+                          class="btn btn-danger btn-rounded" ngbTooltip="Remover Unidade"><i class="i-Remove"></i>
+                  </button>&nbsp;
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </wizard-step>
+    </form-wizard>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" ngbAutofocus class="btn btn-success btn-rounded">Ok</button>
+  </div>
+</form>

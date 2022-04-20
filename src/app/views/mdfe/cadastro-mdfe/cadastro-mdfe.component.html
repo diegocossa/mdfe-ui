@@ -1,0 +1,62 @@
+<div class="row">
+    <div class="col-md-6 col-sm-12">
+        <div class="breadcrumb">
+            <h1>MDFe</h1>
+            <ul>
+                <li>Gerar</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-12">
+        <div class="float-right">
+            <button type="button" [routerLink]="['/painel']"
+                    class="btn btn-info m-1" style="float: right">Pesquisa
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="separator-breadcrumb border-top" style="margin-bottom: 1rem"></div>
+
+<form (validSubmit)="filtroSalvar()" [formGroup]="mdfeForm">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <form-wizard [showDone]="false">
+                        <wizard-step [title]="'Operação'" [isActive]="false" [isValid]="mdfeForm.get('uffim').value"
+                                     [showNext]="true" [showPrev]="true">
+                            <app-operacao-mdfe [mdfeForm]="mdfeForm" #operacaoMdfeComponent></app-operacao-mdfe>
+                        </wizard-step>
+
+                        <wizard-step [title]="'Documentos'"
+                                     [ngbTooltip]="!mdfeForm.get('uffim').value ? 'Selecione um estado de descarregamento..' : null"
+                                     [idDisabled]="!mdfeForm.get('uffim').value"
+                                     [isValid]="true"
+                                     [showNext]="true"
+                                     [showPrev]="true">
+                            <app-list-municipio-descarga-mdfe [infmundescargalist]="mdfeForm.get('infmundescargalist')"
+                                                              [ufDescarregamento]="mdfeForm.get('uffim')?.value"></app-list-municipio-descarga-mdfe>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <app-list-seguradora-mdfe
+                                            [seglist]="mdfeForm.get('seglist')"></app-list-seguradora-mdfe>
+                                </div>
+                            </div>
+                        </wizard-step>
+
+                        <wizard-step [title]="'Outros'" [isActive]="false" [isValid]="true" [showPrev]="true">
+                            <app-adicional-mdfe [mdfeForm]="mdfeForm"></app-adicional-mdfe>
+                        </wizard-step>
+                    </form-wizard>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <button class="btn btn-success float-right margin-bottom" style="margin-bottom: 18px" type="submit"><i
+                    class="i-Add"></i>&nbsp;Salvar
+            </button>
+        </div>
+    </div>
+</form>

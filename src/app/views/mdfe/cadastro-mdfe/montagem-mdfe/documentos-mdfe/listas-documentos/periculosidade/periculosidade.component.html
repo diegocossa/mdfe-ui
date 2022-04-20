@@ -1,0 +1,69 @@
+<div class="card" style="margin-bottom: 12px;">
+  <div class="card-body">
+    <form>
+      <div class="row">
+        <div class="col-sm-12 col-md-6 text-center"
+             [style]="periculosidadelist?.controls?.length > 0 ? { paddingBottom: '12px' } : null">
+          <p>Clique no botão ao lado para adicionar itens a lista de itens perigosos.</p>
+        </div>
+        <div class="col-sm-12 col-md-6 text-center"
+             [style]="periculosidadelist?.controls?.length > 0 ? { paddingBottom: '12px' } : null">
+          <button type="button" class="btn btn-rounded btn-success" (click)="adicionarPericulosidade()">Adicionar
+          </button>
+        </div>
+        <div class="col-12" *ngIf="periculosidadelist?.controls?.length > 0">
+          <div class="row">
+            <div class="col-sm-12 col-md-10">
+              <div class="row">
+                <div class="col-md-6 col-sm-12">
+                  <strong>N° ONU/UN</strong>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  <strong>Qtd. Total Produto</strong>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2 col-sm-12 text-center">
+              <strong>Ações</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12" *ngIf="periculosidadelist?.controls?.length > 0">
+          <div class="row">
+            <div class="col-12" *ngFor="let periculosidade of periculosidadelist.controls"
+                 style="padding-bottom: 12px;">
+              <div class="row">
+                <div class="col-sm-12 col-md-10"
+                     *ngIf="periculosidade.valid; else periculosidadeInvalido">
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      {{ periculosidade.get('nonu').value }}
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                      {{ periculosidade.get('qtotprod').value?.length }}
+                    </div>
+                  </div>
+                </div>
+
+                <ng-template #periculosidadeInvalido>
+                  <div class="col-sm-12 col-md-10">
+                    <span class="badge badge-pill badge-danger p-2 mr-1">Item de Periculosidade Inválido! Edite-o para corrigir o problema.</span>
+                  </div>
+                </ng-template>
+
+                <div class="col-md-2 col-sm-12 text-center">
+                  <button type="button" (click)="abrirModalPericulosidade(periculosidade)"
+                          class="btn btn-info btn-rounded" ngbTooltip="Editar Periculosidade"><i class="i-Edit"></i></button>&nbsp;
+                  <button type="button" (click)="removerMunicipioDescarga(periculosidade)"
+                          class="btn btn-danger btn-rounded" ngbTooltip="Remover Periculosidade"><i class="i-Remove"></i>
+                  </button>&nbsp;
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

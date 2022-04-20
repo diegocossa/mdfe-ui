@@ -1,0 +1,6 @@
+/*Esconde a dive de classe Overlay caso seja identificado que o width Mobile maximo deseja igual ou menor que 980px*/
+@media only screen and (max-width: 980px) {
+  .ocultar-objeto-mobile {
+    display: none !important;
+  }
+}

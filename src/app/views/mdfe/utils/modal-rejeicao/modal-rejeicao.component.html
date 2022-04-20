@@ -1,0 +1,23 @@
+<div class="modal-header">
+  <span class="badge badge-pill badge-danger p-3 mr-2">
+    <i class="i-Danger"></i> Manifesto Rejeitado!
+  </span>
+  <button type="button" class="close" aria-label="Fechar" aria-describedby="modal-title"
+          (click)="fecharModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="container-fluid">
+    <div class="row align-items-center">
+      <div class="col-12 justify-content-center">
+        <strong>
+          {{ data?.mdfe?.retornorecibo }}
+        </strong>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="submit" (click)="fecharModal()" class="btn btn-outline-info btn-rounded" style="float: right">Ok</button>
+</div>

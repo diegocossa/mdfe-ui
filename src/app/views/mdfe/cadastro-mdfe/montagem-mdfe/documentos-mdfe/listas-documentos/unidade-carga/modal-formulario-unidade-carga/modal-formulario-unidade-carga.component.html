@@ -1,0 +1,47 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-title">Informações da Unidade de Transporte</h4>
+  <button type="button" class="close" aria-label="Fechar" aria-describedby="modal-title" (click)="salvarUnidadeCarga()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form [formGroup]="data.unidadeCarga" (validSubmit)="salvarUnidadeCarga()">
+  <div class="modal-body">
+    <form-wizard [showDone]="false">
+      <wizard-step title="Principal" [isActive]="false" [isValid]="true" [showNext]="false" [showPrev]="false">
+        <div class="row">
+          <div class="col-md-6 col-sm-12 form-group mb-3">
+            <label>Tipo de Unidade de Carga</label>
+            <ng-select [items]="tiposUnidade"
+                       appendTo="body"
+                       bindLabel="label"
+                       bindValue="value"
+                       formControlName="tpunidcarga"
+                       clearAllText="Limpar.."
+                       id="tracao">
+            </ng-select>
+          </div>
+          <div class="col-md-3 col-sm-12 form-group mb-3">
+            <label>Identificação da U. Carga</label>
+            <input class="form-control form-control-rounded" placeholder="Identificação da U. Carga" maxlength="20"
+                   formControlName="idunidcarga">
+          </div>
+          <div class="col-md-3 col-sm-12 form-group mb-3">
+            <label>Quantidade Rateada</label>
+            <input class="form-control form-control-rounded" currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', precision: 2 }" placeholder="Qtd. Rateada"
+                   formControlName="qtdrateada">
+          </div>
+
+          <div class="col-12 form-group mb-3">
+            <label>Lacres da Unidade de Carga</label>
+            <tag-input [formControl]="data.unidadeCarga.get('lacreunidcargalist')" placeholder="Lacre +" maxlength="20"
+                       [modelAsStrings]="true" theme='primary' secondaryPlaceholder="Digite e aperte enter..">
+            </tag-input>
+          </div>
+        </div>
+      </wizard-step>
+    </form-wizard>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" ngbAutofocus class="btn btn-success btn-rounded">Ok</button>
+  </div>
+</form>

@@ -1,0 +1,27 @@
+variables:
+  DOCKER_DRIVER: overlay2
+stages:
+    - docker
+    - deploy
+build:docker:
+    stage: docker
+    image: openjdk:8u191-jdk-alpine
+    services:
+        - docker:dind
+    tags: ["UI","MDFE","SHELL"]
+    except:
+        - dev
+    script:
+        - sudo docker login registry.gitlab.com/driveconexao/mdfe-ui -u driveconexao -p patriaamadabrasil
+        - sudo docker build -t uimdfe:release .
+deploy:
+    stage: deploy
+    tags: ["UI","MDFE","SHELL"]
+    except:
+        - dev
+    script:
+        - bash startUI.sh
+    dependencies:
+        - build:docker
+    when: manual
+

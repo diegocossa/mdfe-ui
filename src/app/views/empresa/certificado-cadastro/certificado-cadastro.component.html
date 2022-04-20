@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-md-6 col-sm-12">
+    <div class="breadcrumb">
+      <h1>Certificado</h1>
+      <ul>
+        <li>Cadastro</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="separator-breadcrumb border-top"></div>
+
+<div class="row">
+  <div class="col-12 col-sm-12">
+    <!-- TODO: Filtros aqui. -->
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card mb-4">
+      <div class="card-body">
+        <form [formGroup]="certificadoForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-sm-12 col-md-4 form-group align-self-center">
+              <label>Certificado Digital</label>
+              <input class="form-control form-control-rounded" placeholder="Certificado Digital"
+                     formControlName="arquivo">
+            </div>
+            <div class="col-sm-12 col-md-2 form-group align-self-center" style="padding-top: 22px;">
+              <button type="button" class="btn btn-info" (click)="openInput()">Selecionar Certificado</button>
+              <input id="fileInput" hidden type="file" (change)="fileChange($event.target.files)">
+            </div>
+            <div class="col-sm-12 col-md-6 form-group align-self-center">
+              <label>Senha do Certificado</label>
+              <input class="form-control form-control-rounded" type="password" placeholder="Senha do Certificado"
+                     formControlName="senha">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <button type="submit" class="btn btn-success btn-rounded" style="float: right"
+                      [disabled]="isSubmited">Salvar
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-title">Incluír Condutor</h4>
+  <button type="button" class="close" aria-label="Fechar" aria-describedby="modal-title"
+          (click)="fecharModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form [formGroup]="formInclusao" (validSubmit)="incluirCondutor()">
+  <div class="modal-body">
+    <div class="row">
+      <div class="form-group col-12 mb-3">
+        <label for="motorista">Selecione o Motorista</label>
+        <ng-select [items]="motoristas"
+                   appendTo="body"
+                   bindLabel="nome"
+                   formControlName="motorista"
+                   clearAllText="Limpar.."
+                   notFoundText="Nenhum motorista encontrado."
+                   id="motorista">
+        </ng-select>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" (click)="fecharModal()" class="btn btn-danger btn-rounded" style="float: right">Cancelar</button>
+    <button type="submit" class="btn btn-success btn-rounded" style="float: right">Incluír Motorista</button>
+  </div>
+</form>

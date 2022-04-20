@@ -1,0 +1,33 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-title">Seguradora</h4>
+  <button type="button" class="close" aria-label="Fechar" aria-describedby="modal-title"
+          (click)="fecharModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form [formGroup]="data.seguradora" (validSubmit)="salvarSeguradora()">
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-3 col-sm-12 form-group mb-3">
+        <label>Seguradora</label>
+        <ng-select [items]="seguradoras"
+                   appendTo="body"
+                   bindLabel="nomeseguradora"
+                   formControlName="seguradora"
+                   clearAllText="Limpar.."
+                   notFoundText="Nenhuma seguradora encontrada.."
+                   id="seguradora">
+        </ng-select>
+      </div>
+      <div class="col-md-9 col-sm-12 form-group mb-3">
+        <label>Averbações</label>
+        <tag-input formControlName="segnumeroaverbacaolist" placeholder="Averbação +" maxlength="40"
+                   [modelAsStrings]="true" theme='primary' secondaryPlaceholder="Digite e aperte enter..">
+        </tag-input>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" ngbAutofocus class="btn btn-success btn-rounded">Ok</button>
+  </div>
+</form>

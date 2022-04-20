@@ -1,0 +1,63 @@
+<div class="card o-hidden" [@animate]="{value:'*',params:{y:'120px',opacity:'0',delay:'100ms', duration: '400ms'}}">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="p-4">
+        <div class="auth-logo text-center mb-4">
+          <img src="assets/images/logo.png" alt="">
+        </div>
+        <h1 class="mb-3 text-18">Acessar</h1>
+        <form [formGroup]="signinForm" (ngSubmit)="signin()">
+          <div class="form-group">
+            <label for="email">Usuário</label>
+            <input id="email" class="form-control form-control-rounded" formControlName="email" type="email">
+          </div>
+          <div class="form-group">
+            <label for="password">Senha</label>
+            <input id="password" class="form-control form-control-rounded" formControlName="senha" type="password">
+          </div>
+          <!-- <button class="btn btn-rounded btn-primary btn-block mt-2">Sign In</button> -->
+          <btn-loading btnClass="btn-primary btn-rounded btn-block mt-3" [loadingText]="loadingText"
+                       [loading]="loading">
+            Entrar
+          </btn-loading>
+        </form>
+
+        <div class="mt-3 text-center">
+          <a href="" class="text-muted" routerLink="/sessions/forgot"><u>Recuperar Senha</u></a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 text-center "
+         style="background-size: cover;background-image: url(./assets/images/photo-long-3.png)">
+      <div class="pr-3 auth-right">
+        <div class="row" style="width: 100%; padding-bottom: 12px;">
+          <div class="col-12">
+            <a class="btn btn-rounded btn-outline-facebook btn-outline-email btn-block btn-icon-text"
+               href="https://www.facebook.com.br"
+               target="_blank" ngbTooltip="Ir para a página do Facebook da 3G.">
+              <i class="i-Facebook"></i>
+            </a>
+          </div>
+        </div>
+        <div class="row" style="width: 100%">
+          <div class="col-12">
+            <a class="btn btn-rounded btn-outline-email btn-outline-email btn-block btn-icon-text"
+               href="https://www.conexaomdfe.com.br"
+               target="_blank" ngbTooltip="Ir para o site da 3G.">
+              <i class="i-Globe"></i>
+            </a>
+          </div>
+        </div>
+
+        <!--button class="btn btn-rounded btn-outline-primary btn-outline-google btn-block btn-icon-text">
+          <i class="i-Google-Plus"></i>
+          Sign up with Google
+        </button>
+        <button class="btn btn-rounded btn-outline-primary btn-block btn-icon-text btn-outline-facebook">
+          <i class="i-Facebook-2"></i>
+          Sign up with Facebook
+        </button-->
+      </div>
+    </div>
+  </div>
+</div>

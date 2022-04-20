@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+
+@media (min-width: 992px) {
+    .modal-lg {
+        max-width: 800px;
+    }
+}
+
+@media (min-width: 1100px) {
+    .modal-lg {
+        max-width: 900px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .modal-lg {
+        max-width: 1100px;
+    }
+}
+
+.color-row-on-hover :hover {
+    background-color: whitesmoke;
+}

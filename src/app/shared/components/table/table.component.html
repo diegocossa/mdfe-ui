@@ -1,0 +1,63 @@
+<ngx-datatable
+        #datatableComponent
+        class="material"
+        [columnMode]="columnMode"
+        [messages]="messages"
+        [selectionType]="selectionType"
+        [sorts]="sorts"
+        [sortType]="sortType"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="60"
+        [limit]="pageSize"
+        [offset]="0"
+        [count]="count"
+        [rows]="data"
+        [externalPaging]="externalPaging"
+        [externalSorting]="externalSorting"
+        (page)="onPageChange($event)">
+  <ngx-datatable-column *ngFor="let col of columns"
+                        [name]="col.header"
+                        [sortable]="col.sortable"
+                        [prop]="col.field"
+                        [width]="col.width">
+    <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+      {{column.name}}
+    </ng-template>
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+      <div *ngIf="!col.backgroundColor && !col.buttonEvent">
+        {{ col.pipe ? col.pipe.transform(row[col.field], col.paramx, col.paramy, col.paramz) : row[col.field] }}
+      </div>
+      <div *ngIf="col.backgroundColor && !col.buttonEvent">
+        <span class="badge badge-pill p-2 mr-1" [ngClass]="col.backgroundColor" container="body"
+              tooltipClass="more-width" autoClose="inside"
+              [ngbTooltip]="col.pipe ? col.pipe.transform(row[col.field], col.paramx, col.paramy, col.paramz) : row[col.field]">
+          {{(col.pipe ? col.pipe.transform(row[col.field], col.paramx, col.paramy, col.paramz) : row[col.field]).length > 32 ?
+            (col.pipe ? col.pipe.transform(row[col.field], col.paramx, col.paramy, col.paramz) : row[col.field]).substring(0, 32) + '...' :
+            (col.pipe ? col.pipe.transform(row[col.field], col.paramx, col.paramy, col.paramz) : row[col.field])}}
+        </span>
+      </div>
+
+      <div *ngIf="col.buttonEvent">
+        <button type="button"
+                class="btn {{col.actionButton.color}} m-1"
+                [ngbTooltip]="col.actionButton.tooltip"
+                [disabled]="col.actionButton.disabled"
+                (click)="onActionPerformed({key: col.actionButton.key, data: row})">
+          <i *ngIf="col.actionButton.icon" class="{{col.actionButton.icon}}"></i> {{ col.actionButton.text }}</button>
+      </div>
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Ações" *ngIf="actions?.length > 0" [width]="colActionWidth">
+    <ng-template let-column="column" ngx-datatable-header-template>
+      {{column.name}}
+    </ng-template>
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+      <button type="button" *ngFor="let action of actions"
+              class="btn {{action.color}} m-1"
+              [ngbTooltip]="action.tooltip"
+              [disabled]="action.disabled"
+              (click)="onActionPerformed({key: action.key, data: row})"><i class="{{action.icon}}"></i></button>
+    </ng-template>
+  </ngx-datatable-column>
+</ngx-datatable>

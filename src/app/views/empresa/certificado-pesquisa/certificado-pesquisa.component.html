@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col-md-6 col-sm-12">
+    <div class="breadcrumb">
+      <h1>Certificado</h1>
+      <ul>
+        <li>Pesquisa</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-md-6 col-sm-12">
+    <div class="float-right">
+      <button type="button" [routerLink]="['/empresa/certificado/cadastro', idempresa]"
+              class="btn btn-success m-1" style="float: right">Novo
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="separator-breadcrumb border-top"></div>
+
+<div class="row" *ngIf="certificado">
+  <div class="col-md-12">
+    <div class="card mb-4">
+      <div class="card-body">
+        <div class="row align-items-center">
+          <div class="col-sm-12 col-md-4 align-self-center">
+            Fim da Validade: <strong>{{certificado?.dtfimvalidade | date:'dd/MM/y'}}</strong>
+          </div>
+          <div class="col-sm-12 col-md-4 align-self-center">
+            <h3>Status atual do certificado:</h3>&nbsp;
+            <h3 *ngIf="certificadoValido" style="color: green">Válido!</h3>
+            <h3 *ngIf="!certificadoValido" style="color: red">Inválido!</h3>
+          </div>
+          <div class="col-sm-12 col-md-4 align-self-center">
+            <button type="button" class="btn btn-danger" (click)="excluir()" [disabled]="!certificado">
+              Remover Certificado
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="!certificado">
+  <div class="col-md-12">
+    <div class="card mb-4">
+      <div class="card-body">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-3 align-self-center">
+              <strong>Certificado Inválido! Cadastre-o.</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,52 @@
+<div class="card" style="margin-bottom: 12px;">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-sm-12 col-md-6 text-center">
+        <p>Clique no botão ao lado para adicionar um CIOT.</p>
+      </div>
+      <div class="col-sm-12 col-md-6 text-center">
+        <button type="button" class="btn btn-success btn-rounded" (click)="adicionarCIOT()">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="infciotlist?.controls?.length > 0">
+      <div class="col-12">
+        <div class="row">
+          <div class="col-sm-12 col-md-5">
+            CIOT
+          </div>
+          <div class="col-sm-12 col-md-5">
+            Responsável
+          </div>
+          <div class="col-sm-12 col-md-2 text-center">
+            Ações
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="infciotlist?.controls?.length > 0">
+      <div class="col-12" *ngFor="let ciot of infciotlist.controls" style="padding-bottom: 12px;">
+        <div class="row">
+          <div class="col-sm-12 col-md-5" *ngIf="ciot.valid">
+            {{ ciot.get('ciot').value ? ciot.get('ciot').value : 'CIOT Inválido! Edite-o..' }}
+          </div>
+          <div class="col-sm-12 col-md-5" *ngIf="ciot.valid">
+            <strong>{{ ciot.get('cnpj').value ? cnpjPipe.transform(ciot.get('cnpj').value)
+                : ciot.get('cpf').value ? cpfPipe.transform(ciot.get('cpf').value) : 'Responsável inválido! Edite-o..' }}</strong>
+          </div>
+          <div class="col-sm-12 col-md-10" *ngIf="ciot.invalid">
+            <span class="badge badge-pill badge-danger p-2 mr-1">CIOT Inválido! Edite-o para corrigir o problema.</span>
+          </div>
+          <div class="col-sm-12 col-md-2 col-sm-12 text-center">
+            <button type="button" (click)="abrirModalCIOT(ciot)"
+                    class="btn btn-info btn-rounded" ngbTooltip="Editar CIOT"><i class="i-Edit"></i></button>&nbsp;
+            <button type="button" (click)="removerCIOT(ciot)"
+                    class="btn btn-danger btn-rounded" ngbTooltip="Remover CIOT"><i class="i-Remove"></i>
+            </button>&nbsp;
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

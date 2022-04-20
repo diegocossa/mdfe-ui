@@ -1,0 +1,87 @@
+<div class="card" style="margin-bottom: 12px;">
+  <div class="card-body">
+    <form [formGroup]="infdoclist">
+      <div class="row">
+        <div class="col-sm-12 col-md-6 text-center" style="padding-bottom: 12px;">
+          <p>Clique nos botões ao lado para adicionar documentos a este município.</p>
+        </div>
+        <div class="col-sm-12 col-md-6 text-center" style="padding-bottom: 12px;">
+          <button type="button" (click)="adicionarDocumento('NFE')"
+                  class="btn btn-success btn-rounded">NF-e
+          </button>&nbsp;
+          <button type="button" (click)="adicionarDocumento('CTE')"
+                  class="btn btn-success btn-rounded">CT-e
+          </button>&nbsp;
+          <button type="button" (click)="openInputXML()" class="btn btn-info btn-rounded">XML</button>
+          <input id="fileInput" hidden type="file" multiple
+                 (change)="fileChange($event.target.files)" (click)="fileInput.value = ''" #fileInput>
+        </div>
+        <div class="col-12" *ngIf="infdoclist?.controls?.length > 0">
+          <div class="row">
+            <div class="col-sm-12 col-md-10">
+              <div class="row">
+                <div class="col-md-1 col-sm-12">
+                  <strong>Tipo</strong>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  <strong>Chave</strong>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                  <strong>Valor</strong>
+                </div>
+                <div class="col-md-2 col-sm-12">
+                  <strong>Peso</strong>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2 col-sm-12 text-center">
+              <strong>Ações</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12" *ngIf="infdoclist?.controls.length === 0">
+          <div class="col-12">
+            <span class="badge badge-pill badge-danger p-2 mr-1">Nenhum documento cadastrado, cadastre para gravar o manifesto.</span>
+          </div>
+        </div>
+
+        <div class="col-12" *ngFor="let doc of infdoclist?.controls" style="padding-bottom: 12px;">
+          <div class="row">
+            <div class="col-sm-12 col-md-10" *ngIf="doc.valid; else docInvalido">
+              <div class="row">
+                <div class="col-md-1 col-sm-12">
+                  {{ doc.get('tipodoc').value }}
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  {{ doc.get('chavedoc').value }}
+                </div>
+                <div class="col-md-3 col-sm-12">
+                  {{ doc.get('valor').value | currency: 'BRL':'symbol':'0.2-2':'pt'}}
+                </div>
+                <div class="col-md-2 col-sm-12">
+                  {{ doc.get('peso').value | number: '0.4-4':'pt'}}
+                </div>
+              </div>
+            </div>
+
+            <ng-template #docInvalido>
+              <div class="col-sm-12 col-md-10">
+                <span class="badge badge-pill badge-danger p-2 mr-1">Documento Inválido! Edite-o para corrigir o problema.</span>
+              </div>
+            </ng-template>
+
+            <div class="col-md-2 col-sm-12 text-center">
+              <button type="button" (click)="abrirModalDocumento(doc)"
+                      class="btn btn-info btn-rounded" ngbTooltip="Editar Documento"><i class="i-Edit"></i></button>&nbsp;
+              <button type="button" (click)="removerDocumento(doc)"
+                      class="btn btn-danger btn-rounded" ngbTooltip="Remover Documento"><i class="i-Remove"></i>
+              </button>&nbsp;
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+

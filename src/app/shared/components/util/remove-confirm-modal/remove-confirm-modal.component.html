@@ -1,0 +1,20 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-title">{{data.modalTitle}}</h4>
+  <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
+          (click)="activeModal.dismiss('Clicou fora.')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <p><strong>Tem certeza que você quer deletar o(a) <span
+          class="text-primary">{{data.objectToRemoveName}}</span>?</strong></p>
+  <p>Pense bem!
+    <span class="text-danger">Essa operação não poderá ser desfeita.</span>
+  </p>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-secondary btn-rounded" (click)="activeModal.dismiss('Cancelou.')">
+    Cancel
+  </button>
+  <button type="button" ngbAutofocus class="btn btn-danger btn-rounded" (click)="activeModal.close(true)">Ok</button>
+</div>

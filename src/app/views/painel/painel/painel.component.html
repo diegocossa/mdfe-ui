@@ -1,0 +1,168 @@
+<div class="breadcrumb">
+    <h1>Painel Principal</h1>
+    <ul>
+      <li><a href="">Listagem</a></li>
+      <li>Manifestos</li>
+    </ul>
+</div>
+
+<div class="separator-breadcrumb border-top"></div>
+
+<div class="row">
+  <div class="col-lg-12 col-md-12">
+    <!-- CARD ICON -->
+    <div class="row">
+
+      <div class="col-lg-2 col-md-6 col-sm-6" (click)="setFiltroSituacaoPesquisa('GRAVADO')">
+        <div class="card card-icon mb-4 card-cursor-pointer"
+             [ngClass]="filter.situacao=='GRAVADO' ? ['card-selecionado'] : null">
+          <div class="card-body text-center">
+            <i class="i-Disk"></i>
+            <p class="text-muted mt-2 mb-2">Gravados</p>
+            <p class="text-primary text-24 line-height-1 m-0">{{GRAVADO}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-2 col-md-6 col-sm-6" (click)="setFiltroSituacaoPesquisa('PROCESSAMENTO')">
+        <div class="card card-icon mb-4 card-cursor-pointer"
+             [ngClass]="filter.situacao=='PROCESSAMENTO' ? ['card-selecionado'] : null">
+          <div class="card-body text-center">
+            <i class="i-Gear"></i>
+            <p class="text-muted mt-2 mb-2">Em Processamento</p>
+            <p class="text-primary text-24 line-height-1 m-0">{{PROCESSAMENTO}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-2 col-md-6 col-sm-6" (click)="setFiltroSituacaoPesquisa('REJEITADO')">
+        <div class="card card-icon mb-4 card-cursor-pointer"
+             [ngClass]="filter.situacao=='REJEITADO' ? ['card-selecionado'] : null">
+          <div class="card-body text-center">
+            <i class="i-Close"></i>
+            <p class="text-muted mt-2 mb-2">Rejeitados</p>
+            <p class="text-primary text-24 line-height-1 m-0">{{REJEITADO}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-2 col-md-6 col-sm-6" (click)="setFiltroSituacaoPesquisa('AUTORIZADO')">
+        <div class="card card-icon mb-4 card-cursor-pointer"
+             [ngClass]="filter.situacao=='AUTORIZADO' ? ['card-selecionado'] : null">
+          <div class="card-body text-center">
+            <i class="i-Yes"></i>
+            <p class="text-muted mt-2 mb-2">Autorizados</p>
+            <p class="text-primary text-24 line-height-1 m-0">{{AUTORIZADO}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-2 col-md-6 col-sm-6" (click)="setFiltroSituacaoPesquisa('CANCELADO')">
+        <div class="card card-icon mb-4 card-cursor-pointer"
+             [ngClass]="filter.situacao=='CANCELADO' ? ['card-selecionado'] : null">
+          <div class="card-body text-center">
+            <i class="i-Remove"></i>
+            <p class="text-muted mt-2 mb-2">Cancelados</p>
+            <p class="text-primary text-24 line-height-1 m-0">{{CANCELADO}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-2 col-md-6 col-sm-6" (click)="setFiltroSituacaoPesquisa('ENCERRADO')">
+        <div class="card card-icon mb-4 card-cursor-pointer"
+             [ngClass]="filter.situacao=='ENCERRADO' ? ['card-selecionado'] : null">
+          <div class="card-body text-center">
+            <i class="i-Circular-Point"></i>
+            <p class="text-muted mt-2 mb-2">Encerrados</p>
+            <p class="text-primary text-24 line-height-1 m-0">{{ENCERRADO}}</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<form class="row" (ngSubmit)="pesquisar(0)" #formularioFiltros>
+  <div class="row" *ngIf="mostrarFiltrosPesquisa">
+    <div class="col-sm-12 col-md-3 form-group">
+      <label for="nmdf">N° Manifesto</label>
+      <input id="nmdf" name="nmdf" class="form-control form-control-rounded" type="text" [(ngModel)]="filter.nmdf">
+    </div>
+
+    <div class="col-sm-12 col-md-2 form-group">
+      <label for="serie">Série</label>
+      <input id="serie" name="serie" class="form-control form-control-rounded" type="text" [(ngModel)]="filter.serie">
+
+    </div>
+
+    <div class="col-sm-12 col-md-4 form-group">
+      <label for="chave">Chave</label>
+      <input id="chave" name="chave" class="form-control form-control-rounded" type="text" [(ngModel)]="filter.chave">
+    </div>
+
+    <div class="col-sm-12 col-md-3 form-group">
+      <label for="placa">Placa do Veículo Tração</label>
+      <input id="placa" class="form-control form-control-rounded" type="text" name="placa"[(ngModel)]="filter.placa">
+    </div>
+
+    <div class="col-md-3 col-sm-12 form-group mb-3">
+      <label>Estado de Carregamento</label>
+      <ng-select [items]="ufs"
+                 bindLabel="nome"
+                 bindValue="sigla"
+                 [(ngModel)]="filter.ufini"
+                 name="ufini"
+                 clearAllText="Limpar..">
+      </ng-select>
+    </div>
+
+    <div class="col-md-3 col-sm-12 form-group mb-3">
+      <label>Estado de Descarregamento</label>
+      <ng-select [items]="ufs"
+                 bindLabel="nome"
+                 bindValue="sigla"
+                 name="uffim"
+                 [(ngModel)]="filter.uffim"
+                 clearAllText="Limpar..">
+      </ng-select>
+    </div>
+    <div class="col-4 form-group p-4">
+      <label>&nbsp;</label>
+      <button class="btn btn-outline-primary btn-rounded" (click)="formularioFiltros.reset()">Limpar Filtros</button>&nbsp;
+      <button class="btn btn-primary btn-rounded">Pesquisar</button>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <div style="float: right;">
+      <button class="btn btn-outline-dark btn-rounded" type="button" ngbTooltip="Mostrar/Ocultar filtros.."
+              (click)="mostrarFiltrosPesquisa = !mostrarFiltrosPesquisa">
+        <i class="i-File-Block"></i> Filtros
+      </button>&nbsp;
+    </div>
+    <div style="float: right;">
+      <button class="btn btn-outline-primary btn-rounded" type="button" ngbTooltip="Consulta dos manifestos não encerrados da empresa logada.."
+              (click)="consultarNaoEncerrados()">
+        <i class="i-Filter-2"></i> Não Encerrados
+      </button>&nbsp;
+    </div>
+  </div>
+</form>
+
+<div class="row" style="padding-top: 18px;">
+  <div class="col-12">
+    <div class="card o-hidden">
+      <app-table [data]="mdfes"
+                 [columns]="cols"
+                 [actions]="actions"
+                 [pageSize]="pageSize"
+                 [externalPaging]="true"
+                 [count]="paginatorLength"
+                 [colActionWidth]="200"
+                 (actionPerformed)="actionPerformed($event)"
+                 (page)="onPageChange($event)"></app-table>
+    </div>
+  </div>
+</div>
+

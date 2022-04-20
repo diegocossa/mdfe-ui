@@ -1,0 +1,146 @@
+<div class="main-header">
+  <div class="logo">
+    <img src="./assets/images/logo.png" alt="">
+  </div>
+
+  <div class="menu-toggle" (click)="toggelSidebar()">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <div class="d-flex align-items-center">
+    <!-- Mega menu -->
+    <div ngbDropdown class="mega-menu d-none d-md-block">
+      <button ngbDropdownToggle href="#" class="btn text-muted dropdown-toggle mr-3">Acesso Rápido</button>
+      <div ngbDropdownMenu perfectScrollbar>
+        <div class="row m-0">
+          <div class="col-md-4 p-4 bg-img">
+            <h2 class="title">MDF-<strong>e</strong></h2>
+            <p>O MDF-e deverá ser emitido por empresas prestadoras de serviço de transporte para prestações com mais de
+              um conhecimento de transporte ou
+              pelas demais empresas nas operações, cujo transporte seja realizado em veículos próprios, arrendados, ou
+              mediante
+              contratação de transportador autônomo de cargas, com mais de uma nota fiscal.
+            </p>
+
+
+            <p class="mb-4">A finalidade do MDF-e é agilizar o registro em lote de documentos fiscais em trânsito e
+              identificar a unidade de carga utilizada e demais características do transporte.</p>
+            <a class="btn btn-lg btn-rounded btn-warning" href="https://dfe-portal.sefazvirtual.rs.gov.br/Mdfe"
+               target="_blank">Saiba +</a>
+          </div>
+          <div class="col-md-4 p-4">
+            <p class="text-primary text--cap border-bottom-primary d-inline-block">Utilitários</p>
+            <div class="menu-icon-grid w-auto p-0">
+              <a href="https://dfe-portal.sefazvirtual.rs.gov.br/MDFE/Disponibilidade" class="text-center"
+                 target="_blank"><i class="i-Check"></i> Status dos Servidores</a>
+              <a href="https://dfe-portal.sefazvirtual.rs.gov.br/Mdfe" target="_blank" class="text-center"><i
+                      class="i-Home1"></i> Portal MDFe</a>
+              <a href="https://dfe-portal.sefazvirtual.rs.gov.br/Mdfe/Avisos" target="_blank" class="text-center"><i
+                      class="i-Bell"></i> Avisos</a>
+              <a href="https://dfe-portal.sefazvirtual.rs.gov.br/Mdfe/Noticias" target="_blank" class="text-center"><i
+                      class="i-Newspaper"></i> Notícias</a>
+              <a href="https://dfe-portal.sefazvirtual.rs.gov.br/Mdfe/Legislacao" target="_blank" class="text-center"><i
+                      class="i-Box-Full"></i> Legislação</a>
+              <a href="#"><i class="i-Ambulance"></i> Suporte</a>
+            </div>
+          </div>
+          <div class="col-md-4 p-4">
+            <p class="text-primary text--cap border-bottom-primary d-inline-block">Ações Rápidas</p>
+            <ul class="links">
+              <li><a routerLink="/mdfe/cadastro">Gerar Manifesto</a></li>
+              <!--<li><a [routerLink]="['/painel', 'alterando']">Alterar Manifesto</a></li>-->
+              <!--<li><a [routerLink]="['/painel', 'cancelando']">Cancelar Manifesto</a></li>-->
+              <!--<li><a [routerLink]="['/painel', 'encerrando']">Encerrar Manifesto</a></li>-->
+              <!--<li><a [routerLink]="['/painel', 'incluirmotorista']">Incluir Motorista</a></li>-->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-4 ocultar-objeto-mobile row col-md-11 d-flex align-items-center">
+      <button [ngClass]="controleEmpresaLogadaService?.empresaLogada?.tpemis=='CONTINGENCIA' ? ['col-md-5'] : ['col-md-8']" class="btn btn-outline-success float-left" [routerLink]="['/mdfe/cadastro']"><i class="i-File-Edit"></i>&nbsp;Gerar
+        Manifesto
+      </button>
+
+      <button *ngIf="controleEmpresaLogadaService?.empresaLogada?.tpemis=='CONTINGENCIA'" style="margin-left: 20px" class="col-md-5  btn btn-danger btn-rounded" type="button" placement="bottom" ngbTooltip="Todos os manifestos emitidos em contingência deverão ser reenviados em modo normal em até 168 horas após a emissão da contingência.">
+        <strong> <i class="i-Danger"></i> Em contingência!</strong>
+      </button>
+    </div>
+  </div>
+
+  <div style="margin: auto"></div>
+
+  <div class="header-part-right">
+    <!--<i class="i-Magnifi-Glass1 header-icon" role="button" (click)="searchService.searchOpen = true"></i>
+    <i fullScreenWindow class="i-Full-Screen header-icon d-none d-sm-inline-block" role="button"></i>
+    <div ngbDropdown [placement]="'bottom-right'" class="d-none d-sm-inline-block">
+        <i ngbDropdownToggle class="i-Gear text-muted header-icon" role="button"></i>
+        <div ngbDropdownMenu class="menu-icon-grid-dropdown">
+            <div class="menu-icon-grid">
+                <a href="#"><i class="i-Shop-4"></i> Home</a>
+                <a href="#"><i class="i-Library"></i> UI Kits</a>
+                <a href="#"><i class="i-Drop"></i> Apps</a>
+                <a href="#"><i class="i-File-Clipboard-File&#45;&#45;Text"></i> Forms</a>
+                <a href="#"><i class="i-Checked-User"></i> Sessions</a>
+                <a href="#"><i class="i-Ambulance"></i> Support</a>
+            </div>
+        </div>
+    </div>-->
+
+    <!--            <div ngbDropdown [placement]="'bottom-right'">-->
+    <!--                <div class="badge-top-container">-->
+    <!--                    <span class="badge badge-primary">{{notifications?.length}}</span>-->
+    <!--                    <i ngbDropdownToggle class="i-Bell text-muted header-icon" role="button"></i>-->
+    <!--                </div>-->
+    <!--                <div ngbDropdownMenu class="notification-dropdown rtl-ps-none" perfectScrollbar>-->
+    <!--                    <div class="dropdown-item d-flex" *ngFor="let item of notifications" [routerLink]="[item.link]">-->
+    <!--                        <div class="notification-icon">-->
+    <!--                            <i class="{{item.icon}} text-{{item.status}} mr-1"></i>-->
+    <!--                        </div>-->
+    <!--                        <div class="notification-details flex-grow-1">-->
+    <!--                            <p class="m-0 d-flex align-items-center">-->
+    <!--                                <span>{{item.title}}</span>-->
+    <!--                                <span *ngIf="item.badge" class="badge badge-pill badge-{{item.status}} ml-1 mr-1">{{item.badge}}</span>-->
+    <!--                                <span class="flex-grow-1"></span>-->
+    <!--                                <span class="text-small text-muted ml-auto">{{item.time | relativeTime}}</span>-->
+    <!--                            </p>-->
+    <!--                            <p class="text-small text-muted m-0">{{item.text | excerpt:30}}</p>-->
+    <!--                        </div>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--            </div>-->
+
+    <div class="col align-self-end">
+      <ng-select [items]="controleEmpresaLogadaService.empresas"
+                 appendTo="body"
+                 style="width: 300px;"
+                 bindLabel="fantasia"
+                 [clearable]="false"
+                 [(ngModel)]="controleEmpresaLogadaService.empresaLogada"
+                 clearAllText="Limpar.."
+                 (click)="controleEmpresaLogadaService.atualizarServico()"
+                 (change)="trocarEmpresa(controleEmpresaLogadaService.empresaLogada.idempresa)"
+                 notFoundText="Nenhuma empresa encontrada.."
+                 id="tracao">
+      </ng-select>
+    </div>
+
+    <div ngbDropdown [placement]="'bottom-right'" class="user col align-self-end">
+      <img src="./assets/images/3gbrasil.png" id="userDropdown" ngbDropdownToggle alt="3gbrasil">
+
+      <div ngbDropdownMenu aria-labelledby="userDropdown">
+        <div class="dropdown-header">
+          <i class="i-Lock-User mr-1"></i> 3G Brasil
+        </div>
+        <button class="dropdown-item">Perfil da Conta</button>
+        <button class="dropdown-item" [routerLink]="['/usuario/alterar-senha']">Alterar Senha</button>
+        <button class="dropdown-item" (click)="signout()">Sair</button>
+      </div>
+    </div>
+
+  </div>
+
+</div>

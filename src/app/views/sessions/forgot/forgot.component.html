@@ -1,0 +1,45 @@
+<div class="card o-hidden" [@animate]="{value:'*',params:{y:'120px',opacity:'0',delay:'100ms', duration: '400ms'}}">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="p-4">
+        <div class="auth-logo text-center mb-4">
+          <img src="assets/images/logo.png" alt="">
+        </div>
+        <h1 *ngIf="solicitacaoEnviada == false" class="mb-3 text-18">Recuperação de senha</h1>
+        <h1 *ngIf="solicitacaoEnviada" class="mb-3 text-18">Verifique seu e-mail, enviamos um link para você criar uma
+          nova senha.</h1>
+        <form *ngIf="solicitacaoEnviada == false" action="" [formGroup]="emailForm" (validSubmit)="resetaSenha()">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input formControlName="email" id="email" class="form-control form-control-rounded" type="email">
+          </div>
+          <button type="submit" class="btn btn-primary btn-block btn-rounded mt-3">Resetar Senha</button>
+        </form>
+        <div class="mt-3 text-center">
+          <a href="" *ngIf="solicitacaoEnviada == false" class="text-muted" routerLink="/sessions/signin"><u>Acessar</u></a>
+          <button *ngIf="solicitacaoEnviada" class="btn btn-primary btn-block btn-rounded mt-3"
+                  routerLink="/sessions/signin">Acessar
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 text-center "
+         style="background-size: cover;background-image: url(./assets/images/photo-long-3.png)">
+      <div class="pr-3 auth-right">
+        <a class="btn btn-rounded btn-outline-primary btn-outline-email btn-block btn-icon-text"
+           href="https://www.conexaomdfe.com.br" target="_blank">
+          <i class="i-Globe"></i>
+          www.3gbrasil.com.br
+        </a>
+        <!--button class="btn btn-outline-primary btn-outline-google btn-block btn-icon-text btn-rounded">
+          <i class="i-Google-Plus"></i>
+          Sign in with Google
+        </button>
+        <button class="btn btn-outline-primary btn-outline-facebook btn-block btn-icon-text btn-rounded">
+          <i class="i-Facebook-2"></i>
+          Sign in with Facebook
+        </button-->
+      </div>
+    </div>
+  </div>
+</div>

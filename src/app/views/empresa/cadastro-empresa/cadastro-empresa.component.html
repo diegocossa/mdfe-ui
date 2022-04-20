@@ -1,0 +1,171 @@
+<div class="row">
+  <div class="col-md-6 col-sm-12">
+    <div class="breadcrumb">
+      <h1>Empresa</h1>
+      <ul>
+        <li>Cadastro</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-md-6 col-sm-12">
+    <div class="float-right">
+      <button type="button" [routerLink]="['/empresa']"
+              class="btn btn-info m-1" style="float: right">Pesquisa
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="separator-breadcrumb border-top"></div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card mb-4">
+      <div class="card-body">
+        <div class="card-title mb-3">Cadastrar Empresa</div>
+        <form [formGroup]="empresaForm" (validSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-md-3 col-sm-12 form-group mb-3">
+              <label>CNPJ</label>
+              <input class="form-control form-control-rounded" mask="00.000.000/0000-00" placeholder="CNPJ"
+                     formControlName="cnpj" autofocus>
+            </div>
+            <div class="col-md-3 col-sm-12 form-group mb-3">
+              <label>Inscrição Estadual</label>
+              <input class="form-control form-control-rounded" placeholder="Inscrição Estadual" maxlength="14"
+                     formControlName="inscricaoestadual">
+            </div>
+            <div class="col-md-6 col-sm-12 form-group mb-3">
+              <label>Razão Social</label>
+              <input class="form-control form-control-rounded" placeholder="Razão Social" formControlName="razaosocial" maxlength="60">
+            </div>
+            <div class="col-md-3 col-sm-12 form-group mb-3">
+              <label>Email</label>
+              <input class="form-control form-control-rounded" placeholder="Email" formControlName="email" maxlength="60">
+            </div>
+            <div class="col-md-3 col-sm-12 form-group mb-3">
+              <label>Ambiente</label>
+              <ng-select [items]="ambientes"
+                         bindLabel="label"
+                         bindValue="value"
+                         formControlName="tipoambiente"
+                         clearAllText="Limpar..">
+              </ng-select>
+            </div>
+            <div class="col-md-6 col-sm-12 form-group mb-3">
+              <label>Nome Fantasia</label>
+              <input class="form-control form-control-rounded" placeholder="Fantasia" formControlName="fantasia" maxlength="60">
+            </div>
+            <div class="col-md-3 col-sm-12 form-group mb-3">
+              <label>RNTRC</label>
+              <input class="form-control form-control-rounded" placeholder="RNTRC" formControlName="rntrc"
+                     mask="99999999">
+            </div>
+            <div class="col-md-3 col-sm-12 form-group mb-3">
+              <label>Tipo Emitente</label>
+              <ng-select [items]="tiposEmitente"
+                         bindLabel="label"
+                         bindValue="value"
+                         formControlName="tipoemitente"
+                         clearAllText="Limpar..">
+              </ng-select>
+            </div>
+            <div class="col-md-3 col-sm-12 form-group mb-3">
+              <label>Tipo Emissão</label>
+              <ng-select [items]="tiposEmissao"
+                         bindLabel="label"
+                         bindValue="value"
+                         formControlName="tpemis"
+                         clearAllText="Limpar..">
+              </ng-select>
+            </div>
+            <div class="col-md-3 col-sm-12 form-group mb-3">
+              <label>Tipo de Transportador</label>
+              <ng-select [items]="tiposTransportador"
+                         bindLabel="label"
+                         bindValue="value"
+                         formControlName="tpTransp"
+                         clearAllText="Limpar..">
+              </ng-select>
+            </div>
+            <div class="col-md-3 col-sm-12 form-group mb-3">
+              <label>País</label>
+              <ng-select [items]="paises"
+                         bindLabel="label"
+                         bindValue="value"
+                         formControlName="pais"
+                         clearAllText="Limpar..">
+              </ng-select>
+            </div>
+            <div class="col-md-3 col-sm-12 form-group mb-3">
+              <label>Telefone</label>
+              <input class="form-control form-control-rounded" placeholder="Telefone"
+                     formControlName="fone">
+            </div>
+            <div class="col-md-3 col-sm-12 form-group mb-3">
+              <label>Estado</label>
+              <ng-select [items]="ufs"
+                         bindLabel="nome"
+                         bindValue="sigla"
+                         formControlName="uf"
+                         notFoundText="Nenhum estado encontrado."
+                         (change)="loadMunicipios($event)"
+                         clearAllText="Limpar..">
+              </ng-select>
+            </div>
+            <div class="col-md-3 col-sm-12 form-group mb-3">
+              <label>Município</label>
+              <ng-select [items]="municipios"
+                         bindLabel="nome"
+                         bindValue="nome"
+                         formControlName="municipio"
+                         notFoundText="Nenhum município encontrado."
+                         (change)="loadIdMunicipio($event)"
+                         clearAllText="Limpar..">
+              </ng-select>
+            </div>
+            <div class="col-md-3 col-sm-12 form-group mb-3">
+              <label>CEP</label>
+              <input class="form-control form-control-rounded" placeholder="CEP" mask="00000-000" formControlName="cep">
+            </div>
+            <div class="col-md-6 col-sm-12 form-group mb-3">
+              <label>Logradouro</label>
+              <input class="form-control form-control-rounded" placeholder="Logradouro" formControlName="logradouro" maxlength="60">
+            </div>
+            <div class="col-md-3 col-sm-12 form-group mb-3">
+              <label>Número</label>
+              <input class="form-control form-control-rounded" placeholder="Número" formControlName="numero" maxlength="8">
+            </div>
+            <div class="col-md-3 col-sm-12 form-group mb-3">
+              <label>Complemento</label>
+              <input class="form-control form-control-rounded" placeholder="Complemento" formControlName="complemento" maxlength="60">
+            </div>
+            <div class="col-md-6 col-sm-12 form-group mb-3">
+              <label>Bairro</label>
+              <input class="form-control form-control-rounded" placeholder="Bairro" formControlName="bairro" maxlength="60">
+            </div>
+            <div class="col-md-3 col-sm-12 form-group mb-3">
+              <label>&nbsp;</label>
+              <label class="checkbox checkbox-primary">
+                <input type="checkbox" formControlName="flagcanalverde">
+                <span>Canal Verde</span>
+                <span class="checkmark"></span>
+              </label>
+            </div>
+
+            <div class="col-12 form-group mb-3">
+              <label>Observação</label>
+              <textarea class="form-control form-control-rounded" placeholder="Observação"
+                        formControlName="observacao"></textarea>
+            </div>
+
+            <div class="col-md-12">
+              <button class="btn btn-primary btn-rounded" style="float: right" [disabled]="isSubmited">Salvar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

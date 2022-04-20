@@ -1,0 +1,83 @@
+<div class="row">
+  <div class="col-md-6 col-sm-12">
+    <div class="breadcrumb">
+      <h1>Motorista</h1>
+      <ul>
+        <li>Cadastro</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-md-6 col-sm-12">
+    <div class="float-right">
+      <button type="button" [routerLink]="['/motorista']"
+              class="btn btn-info m-1" style="float: right">Pesquisa
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="separator-breadcrumb border-top"></div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card mb-4">
+      <div class="card-body">
+        <div class="card-title mb-3">Cadastrar Motorista</div>
+        <form [formGroup]="motoristaForm" (validSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-md-3 col-sm-12 form-group mb-3">
+              <label for="nome">Nome</label>
+              <input id="nome" class="form-control form-control-rounded" placeholder="Nome" formControlName="nome" maxlength="60" autofocus>
+            </div>
+            <div class="col-md-3 col-sm-12 form-group mb-3">
+              <label for="cpf">CPF</label>
+              <input id="cpf" class="form-control form-control-rounded" mask="000.000.000-00" placeholder="CPF" autocomplete="off"
+                     formControlName="cpf">
+            </div>
+            <div class="col-md-3 col-sm-12 form-group mb-3">
+              <label>&nbsp;</label>
+              <label class="checkbox checkbox-primary">
+                <input type="checkbox" formControlName="flagativo">
+                <span>Ativo</span>
+                <span class="checkmark"></span>
+              </label>
+            </div>
+
+            <div class="col-6 col-sm-12">
+
+            </div>
+
+            <!--
+            <div class="col-12">
+              <h5>Dados do Aplicativo</h5>
+            </div>
+
+
+            <div class="col-md-3 col-sm-12 form-group mb-3">
+              <label for="senha">Senha do Motorista</label>
+              <input type="password" id="senha" class="form-control form-control-rounded" placeholder="Senha"
+                     formControlName="senhamotorista" autocomplete="new-password">
+            </div>
+            <div class="col-md-3 col-sm-12 form-group mb-3">
+              <label for="telefone">Telefone</label>
+              <input class="form-control form-control-rounded" id="telefone" placeholder="Telefone"
+                     formControlName="telefone">
+            </div>
+            -->
+
+            <div class="col-12 form-group mb-3">
+              <label for="obs">Observação</label>
+              <textarea id="obs" class="form-control form-control-rounded" placeholder="Observação"
+                        formControlName="observacao"></textarea>
+            </div>
+
+            <div class="col-md-12">
+              <button class="btn btn-primary btn-rounded" style="float: right" [disabled]="isSubmited">Salvar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,207 @@
+<div class="row">
+  <div class="col-md-6 col-sm-12">
+    <div class="breadcrumb">
+      <h1>Veículo</h1>
+      <ul>
+        <li>Cadastro</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-md-6 col-sm-12">
+    <div class="float-right">
+      <button type="button" [routerLink]="['/veiculo']"
+              class="btn btn-info m-1" style="float: right">Pesquisa
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="separator-breadcrumb border-top"></div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card mb-4">
+      <div class="card-body">
+        <div class="card-title mb-3">Cadastrar Veículo</div>
+        <form [formGroup]="veiculoForm" (validSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-md-3 col-sm-12 form-group mb-3">
+              <label>Placa</label>
+              <input appUpperCase class="form-control form-control-rounded" mask="AAAAAAA" placeholder="Placa"
+                     formControlName="placa" autofocus>
+            </div>
+            <div class="col-md-3 col-sm-12 form-group mb-3">
+              <label>RENAVAM</label>
+              <input class="form-control form-control-rounded" placeholder="RENAVAM" maxlength="11"
+                     formControlName="renavam">
+            </div>
+            <div class="col-md-3 col-sm-12 form-group mb-3">
+              <label>Estado</label>
+              <ng-select [items]="ufs"
+                         bindLabel="nome"
+                         bindValue="sigla"
+                         formControlName="uf"
+                         clearAllText="Limpar..">
+              </ng-select>
+            </div>
+
+            <div class="col-md-3 col-sm-12 form-group mb-3">
+              <label>Veículo Tipo</label>
+              <ng-select [items]="tiposVeiculo"
+                         bindLabel="label"
+                         bindValue="value"
+                         formControlName="veiculotipo"
+                         clearAllText="Limpar..">
+              </ng-select>
+            </div>
+
+            <div class="col-md-3 col-sm-12 form-group mb-3">
+              <label>Tipo Rodado</label>
+              <ng-select [items]="tiposRodado"
+                         bindLabel="label"
+                         bindValue="value"
+
+                         formControlName="tiporodado"
+                         clearAllText="Limpar..">
+              </ng-select>
+            </div>
+
+            <div class="col-md-3 col-sm-12 form-group mb-3">
+              <label>Tipo Carroceria</label>
+              <ng-select [items]="tiposCarroceria"
+                         bindLabel="label"
+                         bindValue="value"
+                         formControlName="tipocarroceria"
+                         clearAllText="Limpar..">
+              </ng-select>
+            </div>
+
+            <div class="col-12">
+              <h5>Capacidades</h5>
+            </div>
+
+            <div class="col-md-2 col-sm-12 form-group mb-3">
+              <label>Capacidade M³</label>
+              <input class="form-control form-control-rounded" mask="999" sufix="m³" placeholder="Capacidade M³"
+                     formControlName="capacidadem3">
+            </div>
+            <div class="col-md-2 col-sm-12 form-group mb-3">
+              <label>Capacidade KG</label>
+              <input class="form-control form-control-rounded" mask="999999" sufix="kg" placeholder="Capacidade KG"
+                     formControlName="capacidadekg">
+            </div>
+            <div class="col-md-2 col-sm-12 form-group mb-3">
+              <label>Tara KG</label>
+              <input class="form-control form-control-rounded" mask="999999" sufix="kg" placeholder="Tara"
+                     formControlName="tara">
+            </div>
+
+            <div class="col-12">
+              <h5>Proprietário</h5>
+            </div>
+
+            <div class="col-md-3 col-sm-12 form-group mb-3">
+              <label>Tipo Propriedade</label>
+              <label class="radio radio-outline-primary">
+                <input type="radio" name="tipopropriedade" [value]="'PROPRIO'" formControlName="tipopropriedade">
+                <span>Próprio</span>
+                <span class="checkmark"></span>
+              </label>
+              <label class="radio radio-outline-primary">
+                <input type="radio" name="tipopropriedade" [value]="'TERCEIRO'" formControlName="tipopropriedade">
+                <span>Terceiro</span>
+                <span class="checkmark"></span>
+              </label>
+            </div>
+
+            <div class="col-12" *ngIf="veiculoForm.get('tipopropriedade').value === 'TERCEIRO'">
+              <div class="row">
+                <div class="col-12">
+                  <h5>Dados do Proprietário</h5>
+                </div>
+
+                <div class="col-md-3 col-sm-12 form-group mb-3">
+                  <label>Tipo Terceiro</label>
+                  <label class="radio radio-outline-primary">
+                    <input type="radio" name="tipoTerceiro" [value]="'PF'" [ngModelOptions]="{standalone: true}"
+                           [(ngModel)]="tipoTerceiro" (change)="atualizarValidadoresProprietario()">
+                    <span>Pessoa Física</span>
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="radio radio-outline-primary">
+                    <input type="radio" name="tipoTerceiro" [value]="'PJ'" [ngModelOptions]="{standalone: true}"
+                           [(ngModel)]="tipoTerceiro" (change)="atualizarValidadoresProprietario()">
+                    <span>Pessoa Jurídica</span>
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+              </div>
+
+              <div [formGroup]="veiculoForm.get('proprietario')" class="row">
+                <div class="col-md-3 col-sm-12 form-group mb-3" *ngIf="tipoTerceiro === 'PF'">
+                  <label>CPF do Proprietário</label>
+                  <input class="form-control form-control-rounded" mask="000.000.000-00" placeholder="CPF"
+                         formControlName="cpfcnpj">
+                </div>
+
+                <div class="col-md-3 col-sm-12 form-group mb-3" *ngIf="tipoTerceiro === 'PJ'">
+                  <label>CNPJ do Proprietário</label>
+                  <input class="form-control form-control-rounded" mask="00.000.000/0000-00" placeholder="CNPJ"
+                         formControlName="cpfcnpj">
+                </div>
+
+                <div class="col-md-3 col-sm-12 form-group mb-3">
+                  <label>RNTRC</label>
+                  <input class="form-control form-control-rounded" placeholder="RNTRC" formControlName="rntrc"
+                         maxlength="8">
+                </div>
+
+                <div class="col-md-3 col-sm-12 form-group mb-3">
+                  <label>Nome do Proprietário</label>
+                  <input class="form-control form-control-rounded" placeholder="Nome" formControlName="nome" maxlength="60">
+                </div>
+
+                <div class="col-md-3 col-sm-12 form-group mb-3">
+                  <label>Inscrição Estadual</label>
+                  <input class="form-control form-control-rounded" placeholder="Inscrição Estadual"
+                         formControlName="ie" maxlength="14">
+                </div>
+
+                <div class="col-md-3 col-sm-12 form-group mb-3">
+                  <label>Estado</label>
+                  <ng-select [items]="ufs"
+                             bindLabel="nome"
+                             bindValue="sigla"
+                             formControlName="uf"
+                             clearAllText="Limpar..">
+                  </ng-select>
+                </div>
+
+                <div class="col-md-3 col-sm-12 form-group mb-3">
+                  <label>Tipo Proprietário</label>
+                  <ng-select [items]="tiposProprietario"
+                             bindLabel="label"
+                             bindValue="value"
+                             formControlName="tpProp"
+                             clearAllText="Limpar..">
+                  </ng-select>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 form-group mb-3">
+              <label>Observação</label>
+              <textarea class="form-control form-control-rounded" placeholder="Observação"
+                        formControlName="observacao"></textarea>
+            </div>
+
+            <div class="col-md-12">
+              <button class="btn btn-primary btn-rounded" style="float: right" [disabled]="isSubmited">Salvar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

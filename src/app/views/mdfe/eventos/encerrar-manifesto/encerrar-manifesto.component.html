@@ -1,0 +1,43 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-title">Encerrar Manifesto</h4>
+  <button type="button" class="close" aria-label="Fechar" aria-describedby="modal-title"
+          (click)="fecharModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form [formGroup]="formEncerramento" (validSubmit)="encerrarManifesto()">
+  <div class="modal-body">
+    <div class="row">
+      <div class="form-group col-md-6 col-sm-12 mb-3">
+        <label for="estados">Estado</label>
+        <ng-select [items]="ufs"
+                   appendTo="body"
+                   bindLabel="nome"
+                   bindValue="sigla"
+                   formControlName="uf"
+                   clearAllText="Limpar.."
+                   (change)="carregarMunicipios($event)"
+                   notFoundText="Nenhum estado encontrado.."
+                   id="estados">
+        </ng-select>
+      </div>
+
+      <div class="form-group col-md-6 col-sm-12 mb-3">
+        <label for="cidade">Cidade</label>
+        <ng-select [items]="municipios"
+                   appendTo="body"
+                   bindLabel="nome"
+                   bindValue="id"
+                   formControlName="codigomunicipio"
+                   clearAllText="Limpar.."
+                   notFoundText="Nenhuma cidade encontrada.."
+                   id="cidade">
+        </ng-select>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" (click)="fecharModal()" class="btn btn-danger btn-rounded" style="float: right">Cancelar</button>
+    <button type="submit" class="btn btn-success btn-rounded" style="float: right">Encerrar Manifesto</button>
+  </div>
+</form>

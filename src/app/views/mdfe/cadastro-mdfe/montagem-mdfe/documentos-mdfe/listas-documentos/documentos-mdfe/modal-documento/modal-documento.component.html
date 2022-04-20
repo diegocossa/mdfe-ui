@@ -1,0 +1,119 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-title">Documento: <strong>{{data.documento.get('tipodoc').value}}</strong></h4>
+  <button type="button" class="close" aria-label="Fechar" aria-describedby="modal-title"
+          (click)="fecharModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form [formGroup]="data.documento" (validSubmit)="salvarDocumento()">
+  <div class="modal-body">
+    <form-wizard [showDone]="false">
+      <wizard-step title="Principal" [isActive]="false" [isValid]="true" [showNext]="false" [showPrev]="false">
+        <div class="row">
+          <div class="col-md-6 col-sm-12 form-group mb-3">
+            <label>Chave do Documento</label>
+            <input class="form-control form-control-rounded" maxlength="44"
+                   placeholder="Chave" formControlName="chavedoc">
+          </div>
+
+          <div class="col-md-6 col-sm-12 form-group mb-3">
+            <label>Segundo Cód. Barras</label>
+            <input class="form-control form-control-rounded" maxlength="36"
+                   placeholder="Segundo Código de Barras" formControlName="segcodbarra">
+          </div>
+
+          <div class="col-md-6 col-sm-12 form-group mb-3">
+            <label>Valor</label>
+            <input class="form-control form-control-rounded" currencyMask
+                   [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', precision: 2 }"
+                   placeholder="Valor do Documento" formControlName="valor">
+          </div>
+
+          <div class="col-md-6 col-sm-12 form-group mb-3">
+            <label>Peso</label>
+            <input class="form-control form-control-rounded" currencyMask
+                   [options]="{ prefix: '', thousands: '.', decimal: ',', precision: 4 }"
+                   placeholder="Peso dos Produtos"
+                   formControlName="peso">
+          </div>
+        </div>
+      </wizard-step>
+      <wizard-step title="Inf. Unidade de Transporte" [isActive]="false" [isValid]="true" [showNext]="false"
+                   [showPrev]="false">
+        <div class="card" style="margin-bottom: 12px;">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-12 col-md-6 text-center" style="padding-bottom: 12px;">
+                <p>Clique no botão ao lado para adicionar itens a lista de unidade de transporte.</p>
+              </div>
+              <div class="col-sm-12 col-md-6 text-center" style="padding-bottom: 12px;">
+                <button type="button" class="btn btn-rounded btn-success" (click)="adicionarUnidadeTransporte()">
+                  Adicionar
+                </button>
+              </div>
+            </div>
+
+            <div class="col-12" *ngIf="data.documento.controls['infunidtransplist']['controls']?.length === 0">
+              Nenhum registro encontrado..
+            </div>
+            <div class="col-12" *ngIf="data.documento.controls['infunidtransplist']['controls']?.length > 0">
+              <div class="row">
+                <div class="col-sm-12 col-md-10">
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      <strong>Tipo da Unidade de Transporte</strong>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                      <strong>Indentificação da U. de Transporte</strong>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2 col-sm-12 text-center">
+                  <strong>Ações</strong>
+                </div>
+              </div>
+            </div>
+            <div class="col-12" *ngFor="let unidadeTransp of data.documento.controls['infunidtransplist']['controls']"
+                 style="padding-bottom: 12px;">
+              <div class="row">
+                <div class="col-sm-12 col-md-10" *ngIf="unidadeTransp.valid; else unidadeInvalida">
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      {{ getTipoUnidadeTransporte(unidadeTransp.get('tpunidtransp').value) }}
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                      {{ unidadeTransp.get('idunidtransp').value }}
+                    </div>
+                  </div>
+                </div>
+
+                <ng-template #unidadeInvalida>
+                  <div class="col-sm-12 col-md-10">
+                    <span class="badge badge-pill badge-danger p-2 mr-1">Unidade de Transporte inválida! Edite-a para corrigir.</span>
+                  </div>
+                </ng-template>
+
+                <div class="col-md-2 col-sm-12 text-center">
+                  <button type="button" (click)="abrirModalUnidadeTransporte(unidadeTransp)"
+                          class="btn btn-info btn-rounded" ngbTooltip="Editar Unidade"><i class="i-Edit"></i></button>&nbsp;
+                  <button type="button" (click)="removerUnidade(unidadeTransp)"
+                          class="btn btn-danger btn-rounded" ngbTooltip="Remover Unidade"><i class="i-Remove"></i>
+                  </button>&nbsp;
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </wizard-step>
+
+      <wizard-step title="Periculosidade" [isActive]="false" [isValid]="true" [showNext]="false"
+                   [showPrev]="false">
+        <app-periculosidade [periculosidadelist]="data.documento.get('periculosidadelist')"></app-periculosidade>
+      </wizard-step>
+    </form-wizard>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" ngbAutofocus class="btn btn-success btn-rounded">Ok</button>
+  </div>
+</form>

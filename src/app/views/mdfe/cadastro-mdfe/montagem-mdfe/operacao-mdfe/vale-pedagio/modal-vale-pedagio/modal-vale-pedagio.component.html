@@ -1,0 +1,63 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-title">Vale Pedágio</h4>
+  <button type="button" class="close" aria-label="Fechar" aria-describedby="modal-title"
+          (click)="fecharModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form [formGroup]="data.valePedagio" (validSubmit)="salvarVale()">
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-12">
+        <div class="row">
+          <div class="col-md-3 col-sm-12 form-group mb-3">
+            <label>Responsável Pelo Pagamento</label>
+            <ng-select [items]="tiposResponsaveis"
+                       appendTo="body"
+                       bindLabel="label"
+                       bindValue="value"
+                       [(ngModel)]="tipoResponsavel"
+                       [ngModelOptions]="{standalone: true}"
+                       clearAllText="Limpar.."
+                       notFoundText="Nenhuma tração encontrado.."
+                       id="tracao">
+            </ng-select>
+          </div>
+          <div class="col-md-3 col-sm-12 form-group mb-3">
+            <label>{{ tipoResponsavel === 'CPF' ? 'CPF Autorizado' : 'CNPJ Autorizado'}}</label>
+            <input class="form-control form-control-rounded"
+                   *ngIf="tipoResponsavel === 'CNPJ'"
+                   [placeholder]="'CNPJ Pagador'"
+                   [mask]="'00.000.000/0000-00'"
+                   [formControlName]="'cnpjpg'">
+            <input class="form-control form-control-rounded"
+                   *ngIf="tipoResponsavel === 'CPF'"
+                   [placeholder]="'CPF Pagador'"
+                   [mask]="'000.000.000-00'"
+                   [formControlName]="'cpfpg'">
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-sm-12 form-group mb-3">
+        <label>CNPJ Fornecedor</label>
+        <input class="form-control form-control-rounded" placeholder="CNPJ Fornecedor" mask="00.000.000/0000-00"
+               formControlName="cnpjforn">
+      </div>
+      <div class="col-md-4 col-sm-12 form-group mb-3">
+        <label>N° Comprovante Compra</label>
+        <input class="form-control form-control-rounded" placeholder="N° Comprovante Compra" mask="99999999999999999999"
+               formControlName="ncompra">
+      </div>
+      <div class="col-md-4 col-sm-12 form-group mb-3">
+        <label>Valor</label>
+        <input class="form-control form-control-rounded" currencyMask
+               [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', precision: 2 }"
+               placeholder="Valor do Vale" formControlName="vvaleped">
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" ngbAutofocus class="btn btn-success btn-rounded">Ok</button>
+  </div>
+</form>

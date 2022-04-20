@@ -1,0 +1,60 @@
+<div class="card" style="margin-bottom: 12px;">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-sm-12 col-md-6 text-center">
+        <p>Clique no botão ao lado para adicionar um Vale Pedágio.</p>
+      </div>
+      <div class="col-sm-12 col-md-6 text-center">
+        <button type="button" class="btn btn-success btn-rounded" (click)="adicionarValePedagio()">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="valepedagiolist?.controls?.length > 0">
+      <div class="col-12">
+        <div class="row">
+          <div class="col-sm-12 col-md-3">
+            CNPJ Fornecedor
+          </div>
+          <div class="col-sm-12 col-md-3">
+            N° Comprovante
+          </div>
+          <div class="col-sm-12 col-md-4">
+            Valor
+          </div>
+          <div class="col-sm-12 col-md-2 text-center">
+            Ações
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="valepedagiolist?.controls?.length > 0">
+      <div class="col-12" *ngFor="let vale of valepedagiolist.controls" style="padding-bottom: 12px;">
+        <div class="row">
+          <div class="col-sm-12 col-md-3" *ngIf="vale.valid">
+            <div *ngIf="vale.get('cnpjforn').value">{{ cnpjPipe.transform(vale.get('cnpjforn').value) }}</div>
+            <strong *ngIf="!vale.get('cnpjforn').value">CNPJ Fornecedor Inválido! Edite-o..</strong>
+          </div>
+          <div class="col-sm-12 col-md-3" *ngIf="vale.valid">
+            <div *ngIf="vale.get('ncompra').value">{{ vale.get('ncompra').value }}</div>
+            <strong *ngIf="!vale.get('ncompra').value">N° Comprovante Inválido! Edite-o..</strong>
+          </div>
+          <div class="col-sm-12 col-md-4" *ngIf="vale.valid">
+            <div *ngIf="vale.get('vvaleped').value">{{ vale.get('vvaleped').value | currency: 'BRL':'symbol':'0.2-2' }}</div>
+            <strong *ngIf="!vale.get('vvaleped').value">Valor Inválido! Edite-o..</strong>
+          </div>
+          <div class="col-sm-12 col-md-10" *ngIf="vale.invalid">
+            <span class="badge badge-pill badge-danger p-2 mr-1">Vale Pedágio Inválido! Edite-o para corrigir o problema.</span>
+          </div>
+          <div class="col-sm-12 col-md-2 col-sm-12 text-center">
+            <button type="button" (click)="abrirModalVale(vale)"
+                    class="btn btn-info btn-rounded" ngbTooltip="Editar Vale"><i class="i-Edit"></i></button>&nbsp;
+            <button type="button" (click)="removerVale(vale)"
+                    class="btn btn-danger btn-rounded" ngbTooltip="Remover Vale"><i class="i-Remove"></i>
+            </button>&nbsp;
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+<div class="card" style="margin-bottom: 12px;">
+  <div class="card-body">
+    <form>
+      <div class="row">
+        <div class="col-sm-12 col-md-6 text-center"
+             [style]="infmundescargalist?.controls?.length > 0 ? { paddingBottom: '12px' } : null">
+          <p>Clique no botão ao lado para adicionar itens ao municípios de descarga.</p>
+        </div>
+        <div class="col-sm-12 col-md-6 text-center"
+             [style]="infmundescargalist?.controls?.length > 0 ? { paddingBottom: '12px' } : null">
+          <button type="button" class="btn btn-rounded btn-success" (click)="adicionarMunicipioDescarga()">Adicionar
+          </button>
+        </div>
+        <div class="col-12" *ngIf="infmundescargalist?.controls?.length > 0">
+          <div class="row">
+            <div class="col-sm-12 col-md-10">
+              <div class="row">
+                <div class="col-md-6 col-sm-12">
+                  <strong>Município de Descarregamento</strong>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  <strong>Quantidade de Documentos</strong>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2 col-sm-12 text-center">
+              <strong>Ações</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12" *ngIf="infmundescargalist?.controls?.length > 0">
+          <div class="row">
+            <div class="col-12" *ngFor="let municipioDescarga of infmundescargalist.controls"
+                 style="padding-bottom: 12px;">
+              <div class="row">
+                <div class="col-sm-12 col-md-10"
+                     *ngIf="municipioDescarga.valid; else municipioDescargaInvalido">
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      {{ municipioDescarga.get('xmundescarga').value }}
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                      {{ municipioDescarga.get('infdoclist').value?.length }}
+                    </div>
+                  </div>
+                </div>
+
+                <ng-template #municipioDescargaInvalido>
+                  <div class="col-sm-12 col-md-10">
+                    <span class="badge badge-pill badge-danger p-2 mr-1">Mun. de Descarga Inválido! Edite-o para corrigir o problema.</span>
+                  </div>
+                </ng-template>
+
+                <div class="col-md-2 col-sm-12 text-center">
+                  <button type="button" (click)="abrirModalMunicipioDescarga(municipioDescarga)"
+                          class="btn btn-info btn-rounded" ngbTooltip="Editar Documento"><i class="i-Edit"></i></button>&nbsp;
+                  <button type="button" (click)="removerMunicipioDescarga(municipioDescarga)"
+                          class="btn btn-danger btn-rounded" ngbTooltip="Remover Documento"><i class="i-Remove"></i>
+                  </button>&nbsp;
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>

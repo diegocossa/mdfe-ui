@@ -1,0 +1,42 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-title">Autorizado a Baixar o XML</h4>
+  <button type="button" class="close" aria-label="Fechar" aria-describedby="modal-title"
+          (click)="fecharModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form [formGroup]="data.autorizado" (validSubmit)="salvarAutorizado()">
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-6 col-sm-12 form-group mb-3">
+        <label>Tipo Autorizado</label>
+        <ng-select [items]="tiposAutorizados"
+                   appendTo="body"
+                   bindLabel="label"
+                   bindValue="value"
+                   [(ngModel)]="tipoAutorizado"
+                   [ngModelOptions]="{standalone: true}"
+                   clearAllText="Limpar.."
+                   notFoundText="Nenhuma tração encontrado.."
+                   id="tracao">
+        </ng-select>
+      </div>
+      <div class="col-md-6 col-sm-12 form-group mb-3">
+        <label>{{ tipoAutorizado === 'CPF' ? 'CPF Autorizado' : 'CNPJ Autorizado'}}</label>
+        <input class="form-control form-control-rounded"
+               *ngIf="tipoAutorizado === 'CNPJ'"
+               [placeholder]="'CNPJ Autorizado'"
+               [mask]="'00.000.000/0000-00'"
+               [formControlName]="'cnpj'">
+        <input class="form-control form-control-rounded"
+               *ngIf="tipoAutorizado === 'CPF'"
+               [placeholder]="'CPF Autorizado'"
+               [mask]="'000.000.000-00'"
+               [formControlName]="'cpf'">
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" ngbAutofocus class="btn btn-success btn-rounded">Ok</button>
+  </div>
+</form>

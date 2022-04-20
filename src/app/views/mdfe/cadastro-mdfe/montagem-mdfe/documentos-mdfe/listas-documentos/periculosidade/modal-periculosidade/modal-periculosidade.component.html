@@ -1,0 +1,40 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-title">Município de Descarga</h4>
+  <button type="button" class="close" aria-label="Fechar" aria-describedby="modal-title"
+          (click)="fecharModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form [formGroup]="data.periculosidade" (validSubmit)="salvarPericulosidade()">
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-3 col-sm-12 form-group mb-3">
+        <label>N° ONU/UN</label>
+        <input class="form-control form-control-rounded" placeholder="N° ONU/UN" formControlName="nonu" maxlength="4">
+      </div>
+      <div class="col-md-3 col-sm-12 form-group mb-3">
+        <label>Nome do Produto P/ Embarque</label>
+        <input class="form-control form-control-rounded" placeholder="Nome do Produto Apropriado P/ Embarque" formControlName="xnomeae" maxlength="150">
+      </div>
+      <div class="col-md-3 col-sm-12 form-group mb-3">
+        <label>Classe de Risco</label>
+        <input class="form-control form-control-rounded" placeholder="Classe de Risco" formControlName="xclarisco" maxlength="40">
+      </div>
+      <div class="col-md-3 col-sm-12 form-group mb-3">
+        <label>Grupo de Embalagem</label>
+        <input class="form-control form-control-rounded" placeholder="Grupo de Embalagem" formControlName="gremb" maxlength="6">
+      </div>
+      <div class="col-md-3 col-sm-12 form-group mb-3">
+        <label>Qtd. Total Produto</label>
+        <input class="form-control form-control-rounded" placeholder="Qtd. Total Produto" formControlName="qtotprod" maxlength="20">
+      </div>
+      <div class="col-md-3 col-sm-12 form-group mb-3">
+        <label>Qtd. Tipo Volumes</label>
+        <input class="form-control form-control-rounded" placeholder="Qtd. Tipo Volumes" formControlName="qvoltipo" maxlength="60">
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" ngbAutofocus class="btn btn-success btn-rounded">Ok</button>
+  </div>
+</form>

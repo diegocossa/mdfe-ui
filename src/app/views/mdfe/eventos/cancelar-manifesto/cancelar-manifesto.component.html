@@ -1,0 +1,22 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-title">Cancelar Manifesto</h4>
+  <button type="button" class="close" aria-label="Fechar" aria-describedby="modal-title"
+          (click)="fecharModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form [formGroup]="formCancelamento" (validSubmit)="cancelarManifesto()">
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-12 form-group mb-3">
+        <label>Motivo do cancelamento</label>
+        <textarea class="form-control form-control-rounded" placeholder="Digite o motivo do cancelamento.."
+                  formControlName="motivo" rows="3"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" (click)="fecharModal()" class="btn btn-danger btn-rounded" style="float: right">Cancelar</button>
+    <button type="submit" class="btn btn-success btn-rounded" style="float: right">Cancelar Manifesto</button>
+  </div>
+</form>

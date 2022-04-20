@@ -1,0 +1,44 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-title">Município de Descarga</h4>
+  <button type="button" class="close" aria-label="Fechar" aria-describedby="modal-title"
+          (click)="fecharModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form [formGroup]="data.municipioDescarga" (validSubmit)="salvarMunicipioDescarga()">
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-sm-12 col-md-6">
+        <label>&nbsp;</label>
+        <p>Estado de Descarregamento: <strong>{{ufDescarregamento?.nome}}</strong></p>
+      </div>
+      <div class="col-sm-12 col-md-6">
+        <label>Município de Descarga</label>
+        <ng-select [items]="municipios"
+                   appendTo="body"
+                   bindLabel="nome"
+                   [(ngModel)]="munDescargaSelecionado"
+                   [ngModelOptions]="{ standalone: true }"
+                   clearAllText="Limpar.."
+                   (change)="atualizarMun($event)"
+                   notFoundText="Nenhum estado encontrado.."
+                   id="uffim">
+        </ng-select>
+        <span _ngcontent-c18="" class="invalid-feedback ng-star-inserted" ng-reflect-ng-class="invalid-feedback" *ngIf="!munDescargaSelecionado">Município de Descarga é obrigatório.</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <h5>Documentos do Município</h5>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <app-documentos-mdfe [infdoclist]="data.municipioDescarga.get('infdoclist')"></app-documentos-mdfe>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" ngbAutofocus class="btn btn-success btn-rounded">Ok</button>
+  </div>
+</form>

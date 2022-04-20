@@ -1,0 +1,39 @@
+<div class="modal-header">
+  <span class="badge badge-pill badge-primary p-3 mr-2">
+    <i class="i-File-Block"></i> Manifestos Não Encerrados!
+  </span>
+  <button type="button" class="close" aria-label="Fechar" aria-describedby="modal-title"
+          (click)="fecharModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="container-fluid">
+    <div class="color-row-on-hover item-style" *ngFor="let manifesto of data.listMdfeNaoEncerrados">
+      <div class="row align-items-center">
+        <div class="col-sm-12 col-md-6 justify-content-center">
+          <strong>
+            Chave:
+          </strong>
+
+          {{ manifesto.chave }}
+        </div>
+
+        <div class="col-sm-12 col-md-4 justify-content-center">
+          <strong>
+            Protocolo:
+          </strong>
+
+          {{ manifesto.numprotocolo }}
+        </div>
+
+        <div class="col-sm-12 col-md-2 justify-content-center">
+          <button type="button" class="btn btn-primary btn-rounded" (click)="encerrarManifesto(manifesto.chave, manifesto.numprotocolo)" style="float: right">Encerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="submit" (click)="fecharModal()" class="btn btn-outline-info btn-rounded" style="float: right">Ok</button>
+</div>

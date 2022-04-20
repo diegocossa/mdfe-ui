@@ -1,0 +1,22 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-title">Senha Administrativa</h4>
+  <button type="button" class="close" aria-label="Fechar" aria-describedby="modal-title"
+          (click)="fecharModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form [formGroup]="formSenha" (validSubmit)="enviarSenha()">
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-12 form-group mb-3">
+        <label>Senha Administrativa</label>
+        <input class="form-control form-control-rounded" placeholder="Senha.."
+                  formControlName="senhaAdm" type="password" autocomplete="new-password"/>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" (click)="fecharModal()" class="btn btn-danger btn-rounded" style="float: right">Cancelar</button>
+    <button type="submit" class="btn btn-success btn-rounded" style="float: right">Logar-se</button>
+  </div>
+</form>

@@ -1,0 +1,130 @@
+<form [formGroup]="mdfeForm">
+  <div class="row">
+    <div class="col-12">
+      <h5>Informações da Equipe de Operação</h5>
+    </div>
+
+    <div class="form-group col-12 mb-3">
+      <label for="motoristas">Motorista(s)</label>
+      <ng-select [items]="motoristas"
+                 [multiple]="true"
+                 appendTo="body"
+                 bindLabel="motorista.nome"
+                 formControlName="condutorlist"
+                 clearAllText="Limpar.."
+                 notFoundText="Nenhum motorista encontrado.."
+                 id="motoristas">
+      </ng-select>
+    </div>
+
+    <div class="form-group col-md-6 mb-3">
+      <label for="tracao">Tração</label>
+      <ng-select [items]="tracoes"
+                 appendTo="body"
+                 bindLabel="placa"
+                 formControlName="veiculotracao"
+                 clearAllText="Limpar.."
+                 notFoundText="Nenhuma tração encontrado.."
+                 id="tracao">
+      </ng-select>
+    </div>
+
+    <div class="form-group col-md-6 mb-3">
+      <label for="reboques">Reboque(s)</label>
+      <ng-select [items]="reboques"
+                 [multiple]="true"
+                 appendTo="body"
+                 bindLabel="veiculo.placa"
+                 formControlName="veiculoreboquelist"
+                 clearAllText="Limpar.."
+                 notFoundText="Nenhum reboque encontrado.."
+                 id="reboques">
+      </ng-select>
+    </div>
+
+    <div class="col-12">
+      <h5>Informações de Carregamento</h5>
+    </div>
+
+    <div class="form-group col-md-3 mb-3">
+      <label for="ufini">Estado de Carregamento</label>
+      <ng-select [items]="UFs"
+                 bindLabel="nome"
+                 bindValue="sigla"
+                 formControlName="ufini"
+                 clearAllText="Limpar.."
+                 (change)="carregarMunicipiosCarregamento($event)"
+                 notFoundText="Nenhum estado encontrado.."
+                 id="ufini">
+      </ng-select>
+    </div>
+
+    <div class="form-group col-md-9 mb-3">
+      <label for="municipioCarregamento">Município(s) de Carregamento(s)</label>
+      <ng-select [items]="municipiosCarregamento"
+                 [multiple]="true"
+                 bindLabel="xmuncarrega"
+                 formControlName="infmuncarregalist"
+                 clearAllText="Limpar.."
+                 notFoundText="Selecione um estado de carregamento.."
+                 id="municipioCarregamento">
+      </ng-select>
+    </div>
+
+      <div class="form-group col-md-3 mb-3">
+        <label for="uffim">Estado de Descarregamento</label>
+        <ng-select [items]="UFs"
+                   bindLabel="nome"
+                   bindValue="sigla"
+                   formControlName="uffim"
+                   clearAllText="Limpar.."
+                   (change)="carregarMunicipiosDescarregamento($event)"
+                   notFoundText="Nenhum estado encontrado.."
+                   id="uffim">
+        </ng-select>
+      </div>
+
+    <div class="form-group col-md-3 mb-3">
+      <label>&nbsp;</label>
+      <label class="checkbox checkbox-primary">
+        <input type="checkbox" formControlName="indcarregaposterior">
+        <span>Inclusão da Carga Posterior</span>
+        <span class="checkmark"></span>
+      </label>
+    </div>
+
+    <div class="col-12">
+      <h5>Informações de Percurso</h5>
+    </div>
+
+    <div class="form-group col-12 mb-3">
+      <label for="percurso">Percurso</label>
+      <ng-select [items]="UFsPercurso"
+                 [multiple]="true"
+                 appendTo="body"
+                 bindLabel="nome"
+                 formControlName="infpercursolist"
+                 clearAllText="Limpar.."
+                 notFoundText="Selecione um estado de descarregamento.."
+                 id="percurso">
+      </ng-select>
+    </div>
+
+    <div class="col-12">
+      <h5>CIOT</h5>
+    </div>
+
+    <div class="form-group col-12 mb-3">
+      <app-ciot [infciotlist]="mdfeForm.get('infciotlist')"></app-ciot>
+    </div>
+
+    <div class="col-12">
+      <h5>Vale Pedágio</h5>
+    </div>
+
+    <div class="form-group col-12 mb-3">
+      <app-vale-pedagio [valepedagiolist]="mdfeForm.get('valepedagiolist')"></app-vale-pedagio>
+    </div>
+
+  </div>
+</form>

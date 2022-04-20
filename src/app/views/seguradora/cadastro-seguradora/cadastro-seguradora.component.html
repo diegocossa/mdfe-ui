@@ -1,0 +1,74 @@
+<div class="row">
+  <div class="col-md-6 col-sm-12">
+    <div class="breadcrumb">
+      <h1>Seguradora</h1>
+      <ul>
+        <li>Cadastro</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-md-6 col-sm-12">
+    <div class="float-right">
+      <button type="button" [routerLink]="['/seguradora']"
+              class="btn btn-info m-1" style="float: right">Pesquisa
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="separator-breadcrumb border-top"></div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card mb-4">
+      <div class="card-body">
+        <div class="card-title mb-3">Cadastrar Seguradora</div>
+        <form [formGroup]="seguradoraForm" (validSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-md-3 col-sm-12 form-group mb-3">
+              <label>Nome Seguradora</label>
+              <input class="form-control form-control-rounded" placeholder="Nome Seguradora" maxlength="30"
+                     formControlName="nomeseguradora" autofocus>
+            </div>
+            <div class="col-md-3 col-sm-12 form-group mb-3">
+              <label>CNPJ Seguradora</label>
+              <input class="form-control form-control-rounded" placeholder="CNPJ Seguradora" mask="00.000.000/0000-00"
+                     formControlName="cnpjseguradora">
+            </div>
+            <div class="col-md-3 col-sm-12 form-group mb-3">
+              <label>Número Apólice</label>
+              <input class="form-control form-control-rounded" placeholder="Número Apólice" maxlength="20"
+                     formControlName="numeroapolice">
+            </div>
+
+            <div class="col-md-3 col-sm-12 form-group mb-3"
+                 ngbTooltip="Informar apenas se o tipo do responsável for o contratante.">
+              <label>CPF/CNPJ Responsável</label>
+              <input class="form-control form-control-rounded" placeholder="CPF/CNPJ Responsável" maxlength="14"
+                     formControlName="cpfcnpjresponsavel">
+            </div>
+
+            <div class="form-group col-md-3 col-sm-12 mb-3">
+              <label for="tracao">Responsável</label>
+              <ng-select [items]="tiposResponsavel"
+                         appendTo="body"
+                         bindLabel="label"
+                         bindValue="value"
+                         formControlName="responsavel"
+                         clearAllText="Limpar.."
+                         (change)="atualizarValidacao()"
+                         notFoundText="Nenhum responsável encontrado.."
+                         id="tracao">
+              </ng-select>
+            </div>
+
+            <div class="col-md-12">
+              <button class="btn btn-primary btn-rounded" style="float: right" [disabled]="isSubmited">Salvar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
